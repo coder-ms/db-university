@@ -1,45 +1,99 @@
 
 	
 	1. Selezionare tutti gli studenti nati nel 1990 (160):
-		SELECT * FROM `students` WHERE `date_of_birth` BETWEEN  '1990-01-01' AND '1990-12-31'
-		SELECT * FROM `students` WHERE `date_of_birth` LIKE '1990-%';
-		SELECT COUNT(id) FROM `students` WHERE `date_of_birth` BETWEEN '1990-01-01' AND '1990-12-31'; 
-		SELECT COUNT(id) FROM `students` WHERE `date_of_birth` LIKE '1990-%';
+
+		/*
+		###########################################
+		VERSIONE 1
+		###########################################
+		*/
+		SELECT * 
+		FROM `students` 
+		WHERE `date_of_birth` BETWEEN  '1990-01-01' AND '1990-12-31'
+
+		/*
+		###########################################
+		VERSIONE 2
+		###########################################
+		*/
+		SELECT * 
+		FROM `students` 
+		WHERE `date_of_birth` LIKE '1990-%';
+
+		/*
+		###########################################
+		VERSIONE 3
+		###########################################
+		*/
+		SELECT COUNT(id) 
+		FROM `students` 
+		WHERE `date_of_birth` BETWEEN '1990-01-01' AND '1990-12-31';
+
+		/*
+		###########################################
+		VERSIONE 4
+		###########################################
+		*/ 
+		SELECT COUNT(id) 
+		FROM `students` 
+		WHERE `date_of_birth` LIKE '1990-%';
 		
 	
 	2. Selezionare tutti i corsi che valgono più di 10 crediti (479)
-		SELECT * FROM `courses` WHERE `cfu` > 10
+		SELECT * 
+		FROM `courses` 
+		WHERE `cfu` > 10
 		
 	3. Selezionare tutti gli studenti che hanno più di 30 anni
-		SELECT * FROM `students` WHERE (DATEDIFF(NOW(), date_of_birth) / 365.2425) > 30;
+		SELECT * 
+		FROM `students` 
+		WHERE (DATEDIFF(NOW(), date_of_birth) / 365.2425) > 30;
 		
 	4. Selezionare tutti i corsi del primo semestre del primo anno di un qualsiasi corso di laurea (286)
-		SELECT * FROM `courses` WHERE `period` = 'I semestre' AND `year` = 1;
+		SELECT * 
+		FROM `courses`
+		 WHERE `period` = 'I semestre' AND `year` = 1;
 		
 	5. Selezionare tutti gli appelli d'esame che avvengono nel pomeriggio (dopo le 14) del 20/06/2020 (21)
-		SELECT * FROM `exams` WHERE `date` = '2020-06-20' AND `hour` > '14:00:00';
+		SELECT * 
+		FROM `exams` 
+		WHERE `date` = '2020-06-20' AND `hour` > '14:00:00';
 		
 	6. Selezionare tutti i corsi di laurea magistrale (38)
-		SELECT * FROM `degrees` WHERE `level` = 'magistrale';
+		SELECT * 
+		FROM `degrees` 
+		WHERE `level` = 'magistrale';
 		
 	7. Da quanti dipartimenti è composta l'università? (12)
-		SELECT * FROM `departments`
+		SELECT * 
+		FROM `departments`
 		
 	8. Quanti sono gli insegnanti che non hanno un numero di telefono? (50)
-		SELECT * FROM `teachers` WHERE `phone` IS NULL
+		SELECT * 
+		FROM `teachers` 
+		WHERE `phone` IS NULL
 		
 		
 	1. Contare i corsi raggruppati per cfu
-		SELECT COUNT(`id`) AS `totale_coesi_cfu`, `cfu` FROM `courses` GROUP BY `cfu`; 
+		SELECT COUNT(`id`) AS `totale_coesi_cfu`, `cfu` 
+		FROM `courses` 
+		GROUP BY `cfu`; 
 	
 	2. Contare gli studenti raggruppati per anno di nascita
-		SELECT COUNT(`id`) AS `students`, YEAR(`date_of_birth`) AS `student_dob` FROM `students` GROUP BY YEAR(`date_of_birth`);
+		SELECT COUNT(`id`) AS `students`, YEAR(`date_of_birth`) AS `student_dob` 
+		FROM `students` 
+		GROUP BY YEAR(`date_of_birth`);
 		
 	3. Selezionare il voto più basso dato ad ogni appello d'esame
-		SELECT MIN(`vote`) AS `voto_peggiore`,`exam_id` FROM `exam_student` GROUP BY `exam_id`;
+		SELECT MIN(`vote`) AS `worst_mark`,`exam_id` 
+		FROM `exam_student` 
+		GROUP BY `exam_id`;
 
 	4. Contare gli appelli d'esame del mese di luglio raggruppati per giorno
-		SELECT COUNT(`id`) AS `num_appelli`, DAY(`date`) AS `date_exam` FROM `exams` WHERE MONTH(`date`) = 7 GROUP BY DAY(`date`);
+		SELECT COUNT(`id`) AS `num_appelli`, DAY(`date`) AS `date_exam` 
+		FROM `exams` 
+		WHERE MONTH(`date`) = 7 
+		GROUP BY DAY(`date`);
 
 		
 
